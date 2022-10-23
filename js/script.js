@@ -1,4 +1,5 @@
 let score = 0;
+start = true
 let cross = true;
 dino = document.querySelector(".dino");
 gameOver = document.querySelector(".gameOver");
@@ -16,6 +17,11 @@ obstacle.style.animationDuration = newDur + 's';
 // setTimeout(() => {
 // }, 1000);
 document.onkeydown = function (e) {
+  if (!start) {
+    score = 0
+    updateScore(score)
+    start = true
+  }
     audio.play();
     gameOver.style.display = 'none';
     obstacle.classList.add("obstacleAni");
@@ -27,6 +33,7 @@ document.onkeydown = function (e) {
       dino.classList.remove("animateDino");
     }, 700);
   }
+  
   // if (e.keyCode == 39) {
   //     dino = document.querySelector('.dino');
   //     dinoX = parseInt(window.getComputedStyle(dino, null).getPropertyValue('left'));
@@ -56,6 +63,9 @@ setInterval(() => {
   if (offsetX < 100 && offsetY < 100) {
     audio.pause();
     gameOver.style.display = 'block';
+    score -= 1;
+    updateScore(score);
+    start = false
     gameOver.innerHTML = `Game Over - Your Score ${score}`;
     obstacle.classList.remove("obstacleAni");
     audiogo.play();
@@ -79,3 +89,7 @@ setInterval(() => {
   }
 }, 10);
 
+
+function updateScore(score) {
+  scoreCont.innerHTML = "Your Score: " + score
+}
