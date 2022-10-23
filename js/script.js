@@ -8,6 +8,10 @@ audio = new Audio("music.mp3");
 audiogo = new Audio("gameover.mp3");
 obstacle.classList.remove("obstacleAni");
 
+function updateScore(score) {
+  scoreCont.innerHTML = "Your Score: " + score
+}
+
 // obstacle speed
 aniDur = parseFloat(window.getComputedStyle(obstacle, null).getPropertyValue('animation-duration'));
 newDur = 1.8;
@@ -88,8 +92,3 @@ setInterval(() => {
     }, 500);
   }
 }, 10);
-
-
-function updateScore(score) {
-  scoreCont.innerHTML = "Your Score: " + score
-}
